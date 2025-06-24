@@ -1,0 +1,229 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(222.2 84% 4.9%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(222.2 84% 4.9%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(222.2 84% 4.9%);
+    --primary: hsl(222.2 47.4% 11.2%);
+    --primary-foreground: hsl(210 40% 98%);
+    --secondary: hsl(210 40% 96.1%);
+    --secondary-foreground: hsl(222.2 47.4% 11.2%);
+    --muted: hsl(210 40% 96.1%);
+    --muted-foreground: hsl(215.4 16.3% 46.9%);
+    --accent: hsl(210 40% 96.1%);
+    --accent-foreground: hsl(222.2 47.4% 11.2%);
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --border: hsl(214.3 31.8% 91.4%);
+    --input: hsl(214.3 31.8% 91.4%);
+    --ring: hsl(222.2 84% 4.9%);
+    --radius: 0.75rem;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    background-color: var(--muted);
+    color: var(--foreground);
+    margin: 0;
+}
+
+.page-container {
+    display: flex;
+    width: 100%;
+}
+
+.hero-image {
+    width: 45%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-image: url('dalday-bg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.content-wrapper {
+    width: 55%;
+    padding: 4rem;
+    background-color: var(--background);
+    min-height: 100vh;
+}
+
+.faq-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: item-fade-in 0.5s ease-out forwards;
+}
+
+@keyframes item-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.faq-question {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 1.5rem 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--foreground);
+}
+
+.faq-question:hover {
+    color: var(--primary);
+}
+
+.faq-question .lucide-chevron-down {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.faq-question.active .lucide-chevron-down {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+}
+
+.faq-answer .answer-text {
+    padding: 0 0.5rem 1.5rem;
+}
+
+.faq-answer.show {
+    max-height: 500px;
+}
+
+/* Edit Page Specific Styles */
+.edit-page .faq-container {
+    margin: 0;
+}
+.edit-page .content-wrapper {
+    width: 100%;
+}
+.edit-page .faq-item {
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.edit-page .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.75rem;
+    background-color: var(--muted);
+    border-bottom: 1px solid var(--border);
+}
+.edit-page .faq-question .question-text {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+.edit-page .faq-answer {
+    padding: 1.5rem;
+    max-height: 1000px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+    background-color: var(--card);
+}
+.edit-page .faq-question .lucide-chevron-down { display: none; }
+.edit-page .faq-item-controls { display: flex; gap: 0.75rem; }
+.edit-page [contenteditable="true"] {
+    outline-offset: 5px;
+    outline: 2px solid transparent;
+    transition: outline-color 0.2s;
+}
+.edit-page [contenteditable="true"]:focus {
+    outline-color: var(--primary);
+}
+
+.add-new-container {
+    padding-top: 1rem;
+}
+
+.control-btn, #add-faq-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    color: var(--foreground);
+    padding: 0.5rem 0.75rem;
+}
+.control-btn:hover, #add-faq-btn:hover {
+    background-color: var(--accent);
+}
+.control-btn.delete-btn:hover {
+    background-color: var(--destructive);
+    color: var(--destructive-foreground);
+    border-color: var(--destructive);
+}
+#add-faq-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border-color: var(--primary);
+}
+#add-faq-btn:hover {
+    background-color: hsl(222.2 47.4% 11.2% / 0.9);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-image {
+        display: none;
+    }
+    .content-wrapper {
+        width: 100%;
+        padding: 2rem 1.5rem;
+    }
+}
+
+footer {
+    display: none;
+} 
